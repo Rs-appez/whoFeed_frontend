@@ -1,3 +1,6 @@
+import { ParTypes } from './par-types';
+import { Tags } from './tags';
+
 export interface Champions {
   id: number;
   name: string;
@@ -9,4 +12,7 @@ export interface Champions {
   fr_lore: string;
   title: string;
   fr_title: string;
+
+  tags: Tags[];
+  par_types: ParTypes[];
 }
