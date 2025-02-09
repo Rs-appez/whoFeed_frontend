@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Champions } from '../interfaces/champions';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ChampionsService {
-  constructor(private http: HttpClient) { }
+  http = inject(HttpClient);
 
   private apiKey = environment.apiKey;
   private backendUrl = environment.backendUrl;
