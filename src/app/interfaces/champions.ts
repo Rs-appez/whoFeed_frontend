@@ -13,6 +13,8 @@ export interface Champions {
   title: string;
   fr_title: string;
 
+  selected: boolean;
+
   tags: Tags[];
   par_types: ParTypes[];
 }
