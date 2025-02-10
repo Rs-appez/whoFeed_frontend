@@ -1,4 +1,5 @@
 <section>
-  <!--<img src="{{ champion.image }}" alt="{{ champion.name }}" />-->
-  <p>{{ champion.name }}</p>
+  <div class="champion" [ngClass]="{ selected: champion.selected }" (click)="selectChampion()">
+    <img src="{{ url_image + champion.image }}" alt="{{ champion.name }}" />
+  </div>
 </section>

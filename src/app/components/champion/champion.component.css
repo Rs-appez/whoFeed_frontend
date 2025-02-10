@@ -1,0 +1,10 @@
+.selected {
+  filter: grayscale(100%);
+  transform: scaleY(-1);
+}
+
+.champion {
+  transition:
+    transform 0.5s,
+    filter 0.5s;
+}
