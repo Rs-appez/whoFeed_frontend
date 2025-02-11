@@ -6,10 +6,17 @@ import { ChampionComponent } from '../champion/champion.component';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SearchPipe } from '../../pipes/search.pipe';
+import { ChampionDisplayComponent } from '../champion-display/champion-display.component';
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, ChampionComponent, FormsModule, SearchPipe],
+  imports: [
+    CommonModule,
+    ChampionComponent,
+    FormsModule,
+    SearchPipe,
+    ChampionDisplayComponent,
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.css',
 })
