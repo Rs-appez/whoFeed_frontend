@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Champions } from '../../interfaces/champions';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-champion',
@@ -11,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class ChampionComponent {
   @Input() champion!: Champions;
 
-  url_image = 'https://ddragon.leagueoflegends.com/cdn/15.3.1/img/champion/';
+  url_image = environment.imageUrl;
 
   selectChampion() {
     this.champion.selected = !this.champion.selected;
