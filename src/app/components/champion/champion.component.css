@@ -7,4 +7,14 @@
   transition:
     transform 0.5s,
     filter 0.5s;
+  height: 128px;
+  width: 128px;
+}
+
+.champPool {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  width: 1280px;
+  margin: 2% auto;
+  height: 640px;
 }

@@ -1,8 +1,6 @@
-<section>
-  <div class="champPool">
-    <div *ngFor="let champion of champions()">
-      <app-champion [champion]="champion" [filterChampions]="filterChampions"></app-champion>
-    </div>
+<section class="grid">
+  <div>
+    <app-champion [champions]="champions()!" [filterChampions]="filterChampions"></app-champion>
   </div>
   <div class="guess">
     <input [(ngModel)]="guessChampionName" placeholder="Make a guess" />

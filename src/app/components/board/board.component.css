@@ -1,14 +1,1 @@
-.champPool {
-  position: relative;
-  width: 68%;
-  top: 10%;
-  left: 16%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
 
-.champPool>div {
-  flex-basis: 10%;
-}

@@ -1,5 +1,6 @@
-<section>
-  <div class="champion" [ngClass]="{ selected: champion.selected }" (click)="selectChampion()">
+<div class="champPool">
+  <div class="champion" *ngFor="let champion of champions" [ngClass]="{ selected: champion.selected }"
+    (click)="selectChampion(champion)">
     <img src="{{ url_image + champion.image }}" alt="{{ champion.name }}" />
   </div>
-</section>
+</div>

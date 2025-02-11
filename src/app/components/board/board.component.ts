@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChampionsService } from '../../services/champions.service';
-import { Champions } from '../../interfaces/champions';
+import { Champion } from '../../interfaces/champions';
 import { ChampionComponent } from '../champion/champion.component';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -32,11 +32,11 @@ export class BoardComponent {
   championsService: ChampionsService = inject(ChampionsService);
 
   //variables
-  champions: Signal<Champions[] | undefined> = signal<Champions[]>([]);
+  champions: Signal<Champion[] | undefined> = signal<Champion[]>([]);
 
-  filterChampions: WritableSignal<Champions[]> = signal<Champions[]>([]);
+  filterChampions: WritableSignal<Champion[]> = signal<Champion[]>([]);
 
-  guessChampion: Champions | undefined;
+  guessChampion: Champion | undefined;
   guessChampionName: string = '';
 
   constructor() {
@@ -50,11 +50,11 @@ export class BoardComponent {
     });
   }
 
-  selectChampion(champion: Champions) {
+  selectChampion(champion: Champion) {
     this.guessChampion = champion;
   }
 
-  sortedChampions(): Champions[] {
+  sortedChampions(): Champion[] {
     return this.filterChampions().sort((a, b) => {
       if (a.name < b.name) {
         return -1;

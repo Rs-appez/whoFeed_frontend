@@ -1,5 +1,5 @@
 import { Component, Input, signal, WritableSignal } from '@angular/core';
-import { Champions } from '../../interfaces/champions';
+import { Champion } from '../../interfaces/champions';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
 
@@ -10,21 +10,19 @@ import { environment } from '../../../environments/environment';
   styleUrl: './champion.component.css',
 })
 export class ChampionComponent {
-  @Input() champion!: Champions;
-  @Input() filterChampions: WritableSignal<Champions[]> = signal<Champions[]>(
-    [],
-  );
+  @Input() champions!: Champion[];
+  @Input() filterChampions: WritableSignal<Champion[]> = signal<Champion[]>([]);
   url_image = environment.imageUrl;
 
-  selectChampion() {
-    this.champion.selected = !this.champion.selected;
-    if (this.champion.selected) {
-      this.filterChampions.update((champions: Champions[]) => {
-        return champions?.filter((champ) => champ.id !== this.champion.id);
+  selectChampion(champion: Champion) {
+    champion.selected = !champion.selected;
+    if (champion.selected) {
+      this.filterChampions.update((champions: Champion[]) => {
+        return champions?.filter((champ) => champ.id !== champion.id);
       });
     } else {
-      this.filterChampions.update((champions: Champions[]) => {
-        return champions?.concat(this.champion);
+      this.filterChampions.update((champions: Champion[]) => {
+        return champions?.concat(champion);
       });
     }
   }
