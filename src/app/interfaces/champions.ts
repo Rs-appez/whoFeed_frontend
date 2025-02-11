@@ -1,7 +1,7 @@
 import { ParTypes } from './par-types';
 import { Tags } from './tags';
 
-export interface Champions {
+export interface Champion {
   id: number;
   name: string;
   fr_name: string;

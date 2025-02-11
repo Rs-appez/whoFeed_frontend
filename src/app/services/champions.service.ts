@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Champions } from '../interfaces/champions';
+import { Champion } from '../interfaces/champions';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -20,8 +20,8 @@ export class ChampionsService {
     'Content-Type': 'application/json',
   });
 
-  getChampPool(): Observable<Champions[]> {
-    return this.http.get<Champions[]>(`${this.url}/get_champions/`, {
+  getChampPool(): Observable<Champion[]> {
+    return this.http.get<Champion[]>(`${this.url}/get_champions/`, {
       headers: this.headers,
     });
   }

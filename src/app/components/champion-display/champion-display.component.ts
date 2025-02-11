@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Champions } from '../../interfaces/champions';
+import { Champion } from '../../interfaces/champions';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -11,5 +11,5 @@ import { environment } from '../../../environments/environment';
 export class ChampionDisplayComponent {
   url_image = environment.imageUrl;
 
-  @Input() champion!: Champions;
+  @Input() champion!: Champion;
 }
