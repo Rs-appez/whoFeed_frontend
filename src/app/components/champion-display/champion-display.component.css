@@ -7,6 +7,7 @@
   margin: 1px;
   padding: 5px;
   background-color: var(--color-scroll);
+  transition: background 0.3s ease;
 }
 
 .name {
