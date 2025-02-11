@@ -44,14 +44,25 @@ export class BoardComponent {
 
     effect(() => {
       const champions = this.champions();
-      console.log('champions', champions);
       if (champions) {
-        this.filterChampions.update(() => champions);
+        this.filterChampions.set([...champions]);
       }
     });
   }
 
   selectChampion(champion: Champions) {
     this.guessChampion = champion;
+  }
+
+  sortedChampions(): Champions[] {
+    return this.filterChampions().sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
   }
 }
