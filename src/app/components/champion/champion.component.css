@@ -1,6 +1,6 @@
 .selected {
   filter: grayscale(100%);
-  transform: scaleY(-1);
+  transform: scale(0.8);
 }
 
 .champion {
