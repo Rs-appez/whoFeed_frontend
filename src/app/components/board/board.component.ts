@@ -1,4 +1,11 @@
-import { Component, inject, Signal, signal } from '@angular/core';
+import {
+  Component,
+  effect,
+  inject,
+  Signal,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChampionsService } from '../../services/champions.service';
 import { Champions } from '../../interfaces/champions';
@@ -27,14 +34,21 @@ export class BoardComponent {
   //variables
   champions: Signal<Champions[] | undefined> = signal<Champions[]>([]);
 
-  filterChampions: Signal<Champions[] | undefined> = signal<Champions[]>([]);
+  filterChampions: WritableSignal<Champions[]> = signal<Champions[]>([]);
 
   guessChampion: Champions | undefined;
   guessChampionName: string = '';
 
   constructor() {
     this.champions = toSignal(this.championsService.getChampPool());
-    this.filterChampions = this.champions;
+
+    effect(() => {
+      const champions = this.champions();
+      console.log('champions', champions);
+      if (champions) {
+        this.filterChampions.update(() => champions);
+      }
+    });
   }
 
   selectChampion(champion: Champions) {

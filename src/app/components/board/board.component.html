@@ -1,14 +1,15 @@
 <section>
   <div class="champPool">
     <div *ngFor="let champion of champions()">
-      <app-champion [champion]="champion"></app-champion>
+      <app-champion [champion]="champion" [filterChampions]="filterChampions"></app-champion>
     </div>
   </div>
   <div class="guess">
     <input [(ngModel)]="guessChampionName" placeholder="Make a guess" />
     @if (guessChampionName && champions()) {
     <div *ngFor="
-          let champion of champions()! | search: 'name' : guessChampionName
+          let champion of filterChampions()!
+            | search: 'name' : guessChampionName
         ">
       <app-champion-display [champion]="champion"></app-champion-display>
     </div>
