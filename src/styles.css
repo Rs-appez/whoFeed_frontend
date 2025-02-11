@@ -1,1 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-scroll: #b76e39;
+  --color-scroll-dark: #6a2d00;
+}
