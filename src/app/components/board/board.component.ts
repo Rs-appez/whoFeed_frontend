@@ -6,24 +6,16 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ChampionsService } from '../../services/champions.service';
 import { Champion } from '../../interfaces/champions';
 import { ChampionComponent } from '../champion/champion.component';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { SearchPipe } from '../../pipes/search.pipe';
-import { ChampionDisplayComponent } from '../champion-display/champion-display.component';
+import { GuessComponent } from '../guess/guess.component';
 
 @Component({
   selector: 'app-board',
-  imports: [
-    CommonModule,
-    ChampionComponent,
-    FormsModule,
-    SearchPipe,
-    ChampionDisplayComponent,
-  ],
+  imports: [CommonModule, ChampionComponent, GuessComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.css',
 })
@@ -47,22 +39,6 @@ export class BoardComponent {
       if (champions) {
         this.filterChampions.set([...champions]);
       }
-    });
-  }
-
-  selectChampion(champion: Champion) {
-    this.guessChampion = champion;
-  }
-
-  sortedChampions(): Champion[] {
-    return this.filterChampions().sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
     });
   }
 }

@@ -1,10 +1,11 @@
 .champion {
   display: flex;
-  height: 36px;
+  height: 55px;
   width: 200px;
   border: 2px solid black;
   border-radius: 5px;
   margin: 1px;
+  padding: 5px;
   background-color: var(--color-scroll);
 }
 

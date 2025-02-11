@@ -1,0 +1,12 @@
+<div class="container">
+  <input [(ngModel)]="guessChampionName" placeholder="Make a guess" />
+  @if (guessChampionName) {
+  <div class="list">
+    <div *ngFor="
+          let champion of sortedChampions() | search: 'name' : guessChampionName
+        ">
+      <app-champion-display [champion]="champion"></app-champion-display>
+    </div>
+  </div>
+  }
+</div>
