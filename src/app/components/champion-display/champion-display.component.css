@@ -19,4 +19,5 @@
 
 .champion:hover {
   background: var(--color-scroll-dark);
+  border: 3px solid var(--color-scroll-select);
 }
