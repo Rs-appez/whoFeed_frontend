@@ -3,3 +3,9 @@
   --color-scroll-dark: #6a2d00;
   --color-scroll-select: #aa8971;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
