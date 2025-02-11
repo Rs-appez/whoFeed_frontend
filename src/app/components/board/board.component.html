@@ -4,4 +4,14 @@
       <app-champion [champion]="champion"></app-champion>
     </div>
   </div>
+  <div class="guess">
+    <input [(ngModel)]="guessChampionName" placeholder="Make a guess" />
+    @if (guessChampionName && champions()) {
+    <div *ngFor="
+          let champion of champions()! | search: 'name' : guessChampionName
+        ">
+      {{ champion.name }}
+    </div>
+    }
+  </div>
 </section>
