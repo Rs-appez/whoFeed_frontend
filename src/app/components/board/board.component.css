@@ -1,1 +1,15 @@
+.grid {
+  display: grid;
+  grid-template-columns: 16vw 68vw 16vw;
+  grid-template-rows: 5vh 68vh 27vh;
+}
 
+.champPool {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.guess {
+  grid-column: 1;
+  grid-row: 3;
+}
