@@ -1,7 +1,7 @@
 import { Component, inject, AfterViewChecked } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
 import { LocalstorageService } from '../../services/localstorage.service';
-import { Player } from '../../player';
+import { Player } from '../../interfaces/player';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class ConnectComponent {
   private readonly route = inject(Router);
-  private readonly localStorage = inject(LocalstorageService);
+  private readonly localStorageService = inject(LocalstorageService);
 
   // services
   playerService: PlayerService = inject(PlayerService);
@@ -23,7 +23,7 @@ export class ConnectComponent {
   playerName: string = '';
 
   constructor() {
-    this.player = this.localStorage.get<Player>('player');
+    this.player = this.localStorageService.get<Player>('player');
 
     if (this.player) {
       this.connectPlayer();
@@ -40,7 +40,7 @@ export class ConnectComponent {
   }
 
   savePlayer() {
-    this.localStorage.set('player', this.player);
+    this.localStorageService.set('player', this.player);
     this.connectPlayer();
   }
 
