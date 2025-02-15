@@ -1,4 +1,4 @@
-import { Player } from './interfaces/player';
+import { Player } from './player';
 
 export interface Party {
   id: string;
