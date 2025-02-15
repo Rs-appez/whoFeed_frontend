@@ -10,13 +10,11 @@ import { Observable } from 'rxjs/internal/Observable';
 export class PlayerService {
   http = inject(HttpClient);
 
-  private apiKey = environment.apiKey;
   private backendUrl = environment.backendUrl;
 
   url = `${this.backendUrl}/game/api/players`;
 
   headers = new HttpHeaders({
-    Authorization: `TOKEN ${this.apiKey}`,
     'Content-Type': 'application/json',
   });
 
