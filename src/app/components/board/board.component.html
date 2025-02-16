@@ -1,3 +1,6 @@
+@if (!isPartyReady()) {
+<div>waiting for party</div>
+} @else {
 <section class="grid">
   <div class="champPool">
     <app-champion [champions]="champions()!" [filterChampions]="filterChampions"></app-champion>
@@ -6,3 +9,4 @@
     <app-guess [filterChampions]="filterChampions" [guessChampion]="guessChampion"></app-guess>
   </div>
 </section>
+}

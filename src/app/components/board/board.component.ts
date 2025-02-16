@@ -3,6 +3,7 @@ import {
   effect,
   inject,
   OnInit,
+  Signal,
   signal,
   WritableSignal,
 } from '@angular/core';
@@ -14,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { GuessComponent } from '../guess/guess.component';
 import { Router } from '@angular/router';
 import { PlayerService } from '../../services/player.service';
+import { Party } from '../../interfaces/party';
+import { PartyService } from '../../services/party.service';
 
 @Component({
   selector: 'app-board',
@@ -27,6 +30,7 @@ export class BoardComponent implements OnInit {
   //services
   championsService: ChampionsService = inject(ChampionsService);
   playerService: PlayerService = inject(PlayerService);
+  partyService: PartyService = inject(PartyService);
 
   //variables
   champions: WritableSignal<Champion[] | undefined> = signal<Champion[]>([]);
@@ -37,6 +41,9 @@ export class BoardComponent implements OnInit {
   guessChampionName: string = '';
 
   player: Player | null = {} as Player;
+  party: Signal<Party | null> = this.partyService.party;
+
+  isPartyReady = signal(false);
 
   constructor() {
     this.player = this.playerService.player();
@@ -44,11 +51,17 @@ export class BoardComponent implements OnInit {
       this.route.navigate(['/']);
     }
 
+    // edit filterChampions when champions change
     effect(() => {
       const champions = this.champions();
       if (champions) {
         this.filterChampions.set([...champions]);
       }
+    });
+
+    // edit isPartyReady when party change
+    effect(() => {
+      this.checkPartyReady();
     });
   }
 
@@ -56,5 +69,12 @@ export class BoardComponent implements OnInit {
     this.championsService.getChampPool().subscribe((champions) => {
       this.champions.set(champions);
     });
+  }
+  checkPartyReady() {
+    if (this.party()?.players.length === 2) {
+      this.isPartyReady.set(true);
+    } else {
+      this.isPartyReady.set(false);
+    }
   }
 }
