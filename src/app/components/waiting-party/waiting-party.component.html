@@ -1,1 +1,5 @@
-<p>waiting-party works!</p>
+<div>
+  <p *ngIf="party">
+    {{ party()!.id }}
+  </p>
+</div>
