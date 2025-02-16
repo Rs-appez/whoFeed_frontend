@@ -1,4 +1,4 @@
-import { Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PlayerService } from './player.service';
 import { Player } from '../interfaces/player';
@@ -39,14 +39,10 @@ export class LocalstorageService {
   }
 
   private initializeData() {
-    console.log('initializeData');
     //initialize player
     const player = this.get('player') as Player;
-    console.log('player in localstorage', player);
     if (player) {
-      console.log('player in if', player);
       this.playerService.player.set(player);
-      console.log('player in service', this.playerService.player());
     }
 
     //initialize party
