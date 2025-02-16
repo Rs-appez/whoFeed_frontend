@@ -1,6 +1,7 @@
 import { Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PlayerService } from './player.service';
+import { Player } from '../interfaces/player';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,15 @@ export class LocalstorageService {
     this.isBrowser = isPlatformBrowser(this.platformId);
     if (this.isBrowser) {
       this.localStorage = this.document.defaultView?.localStorage;
+
+      //add listener for storage event
       window.addEventListener('storage', this.storageEventListener.bind(this));
+
+      //initialize player
+      const player = this.get('player') as Player;
+      if (player) {
+        this.playerService.player = signal<Player>(player);
+      }
     }
   }
 
