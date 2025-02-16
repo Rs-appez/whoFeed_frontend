@@ -17,10 +17,16 @@ import { Router } from '@angular/router';
 import { PlayerService } from '../../services/player.service';
 import { Party } from '../../interfaces/party';
 import { PartyService } from '../../services/party.service';
+import { WaitingPartyComponent } from '../waiting-party/waiting-party.component';
 
 @Component({
   selector: 'app-board',
-  imports: [CommonModule, ChampionComponent, GuessComponent],
+  imports: [
+    CommonModule,
+    ChampionComponent,
+    GuessComponent,
+    WaitingPartyComponent,
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.css',
 })
