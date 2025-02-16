@@ -1,4 +1,4 @@
-import { inject, Injectable, Signal } from '@angular/core';
+import { effect, inject, Injectable, Signal } from '@angular/core';
 import { Champion } from '../interfaces/champions';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -10,6 +10,17 @@ import { PlayerService } from './player.service';
   providedIn: 'root',
 })
 export class ChampionsService {
+  constructor() {
+    effect(() => {
+      const currentPlayer = this.player();
+      if (currentPlayer) {
+        this.headers = this.headers.set(
+          'Authorization',
+          `Bearer ${currentPlayer.jwttoken}`,
+        );
+      }
+    });
+  }
   http = inject(HttpClient);
 
   private backendUrl = environment.backendUrl;
@@ -20,7 +31,6 @@ export class ChampionsService {
   private player: Signal<Player | null> = this.playerService.player;
 
   headers = new HttpHeaders({
-    Authorization: `Bearer ${this.player()!.jwttoken}`,
     'Content-Type': 'application/json',
   });
 
