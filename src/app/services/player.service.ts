@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, Signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Player } from '../interfaces/player';
 import { Observable } from 'rxjs/internal/Observable';
@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class PlayerService {
   http = inject(HttpClient);
+
+  player: Signal<Player | null> = signal<Player | null>(null);
 
   private backendUrl = environment.backendUrl;
 
