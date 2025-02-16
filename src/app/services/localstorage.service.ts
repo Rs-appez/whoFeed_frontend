@@ -2,6 +2,8 @@ import { Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PlayerService } from './player.service';
 import { Player } from '../interfaces/player';
+import { Party } from '../interfaces/party';
+import { PartyService } from './party.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +16,7 @@ export class LocalstorageService {
     @Inject(PLATFORM_ID) private platformId: Object,
     @Inject(DOCUMENT) private document: Document,
     private playerService: PlayerService,
+    private partyService: PartyService,
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
     if (this.isBrowser) {
@@ -22,20 +25,37 @@ export class LocalstorageService {
       //add listener for storage event
       window.addEventListener('storage', this.storageEventListener.bind(this));
 
-      //initialize player
-      const player = this.get('player') as Player;
-      if (player) {
-        this.playerService.player = signal<Player>(player);
-      }
+      //initialize data
+      this.initializeData();
     }
   }
 
   private storageEventListener(event: StorageEvent) {
-    console.log('storage event', event);
     if (event.key === 'player') {
-      this.playerService.player = signal(this.get('player'));
+      this.playerService.player.set(this.get('player'));
+    } else if (event.key === 'party') {
+      this.partyService.party.set(this.get('party'));
     }
   }
+
+  private initializeData() {
+    console.log('initializeData');
+    //initialize player
+    const player = this.get('player') as Player;
+    console.log('player in localstorage', player);
+    if (player) {
+      console.log('player in if', player);
+      this.playerService.player.set(player);
+      console.log('player in service', this.playerService.player());
+    }
+
+    //initialize party
+    const party = this.get('party') as Party;
+    if (party) {
+      this.partyService.party.set(party);
+    }
+  }
+
   get<T>(key: string): T | null {
     const item = this.localStorage?.getItem(key);
 
