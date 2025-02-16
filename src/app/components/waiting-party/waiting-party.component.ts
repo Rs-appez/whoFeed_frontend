@@ -1,4 +1,4 @@
-import { Component, effect, Input, signal, Signal } from '@angular/core';
+import { Component, Input, Signal } from '@angular/core';
 import { Party } from '../../interfaces/party';
 import { CommonModule } from '@angular/common';
 
