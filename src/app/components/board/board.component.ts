@@ -2,7 +2,7 @@ import {
   Component,
   effect,
   inject,
-  Signal,
+  OnInit,
   signal,
   WritableSignal,
 } from '@angular/core';
@@ -11,10 +11,9 @@ import { Champion } from '../../interfaces/champions';
 import { Player } from '../../interfaces/player';
 import { ChampionComponent } from '../champion/champion.component';
 import { CommonModule } from '@angular/common';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { GuessComponent } from '../guess/guess.component';
-import { LocalstorageService } from '../../services/localstorage.service';
 import { Router } from '@angular/router';
+import { PlayerService } from '../../services/player.service';
 
 @Component({
   selector: 'app-board',
@@ -22,38 +21,40 @@ import { Router } from '@angular/router';
   templateUrl: './board.component.html',
   styleUrl: './board.component.css',
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit {
   private readonly route = inject(Router);
 
   //services
   championsService: ChampionsService = inject(ChampionsService);
-  localStorageService: LocalstorageService = inject(LocalstorageService);
+  playerService: PlayerService = inject(PlayerService);
 
   //variables
-  champions: Signal<Champion[] | undefined> = signal<Champion[]>([]);
+  champions: WritableSignal<Champion[] | undefined> = signal<Champion[]>([]);
 
   filterChampions: WritableSignal<Champion[]> = signal<Champion[]>([]);
 
   guessChampion: Champion | undefined;
   guessChampionName: string = '';
 
-  player: Player = {} as Player;
+  player: Player | null = {} as Player;
 
   constructor() {
-    let player = this.localStorageService.get<Player>('player');
-    if (player) {
-      this.player = player;
-    } else {
+    this.player = this.playerService.player();
+    if (!this.player) {
       this.route.navigate(['/']);
     }
-
-    this.champions = toSignal(this.championsService.getChampPool());
 
     effect(() => {
       const champions = this.champions();
       if (champions) {
         this.filterChampions.set([...champions]);
       }
+    });
+  }
+
+  ngOnInit() {
+    this.championsService.getChampPool().subscribe((champions) => {
+      this.champions.set(champions);
     });
   }
 }
