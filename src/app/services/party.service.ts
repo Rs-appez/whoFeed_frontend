@@ -19,9 +19,7 @@ import { PlayerService } from './player.service';
 export class PartyService {
   constructor() {
     effect(() => {
-      console.log('party service effect');
       const currentPlayer = this.player();
-      console.log('currentPlayer', currentPlayer);
       if (currentPlayer) {
         this.headers = this.headers.set(
           'Authorization',
