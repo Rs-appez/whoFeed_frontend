@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { LocalstorageService } from './localstorage.service';
+import { inject, Injectable, Signal } from '@angular/core';
 import { Player } from '../interfaces/player';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Party } from '../interfaces/party';
+import { PlayerService } from './player.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,24 +12,25 @@ import { Party } from '../interfaces/party';
 export class PartyService {
   http = inject(HttpClient);
 
-  private localstorageService = inject(LocalstorageService);
   private backendUrl = environment.backendUrl;
 
-  url = `${this.backendUrl}/game/api/party`;
+  url = `${this.backendUrl}/game/api/parties`;
 
-  private player: Player = this.localstorageService.get<Player>('player')!;
+  private playerService = inject(PlayerService);
+  private player: Signal<Player | null> = this.playerService.player;
 
   headers = new HttpHeaders({
+    Authorization: `Bearer ${this.player()!.jwttoken}`,
     'Content-Type': 'application/json',
   });
 
   makeParty(): Observable<Party> {
-    this.headers = this.headers.set(
-      'Authorization',
-      `Bearer ${this.player.jwttoken}`,
+    return this.http.post<Party>(
+      `${this.url}/create_party/`,
+      {},
+      {
+        headers: this.headers,
+      },
     );
-    return this.http.post<Party>(`${this.url}/make_party/`, {
-      headers: this.headers,
-    });
   }
 }
