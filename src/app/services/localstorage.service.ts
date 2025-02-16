@@ -1,4 +1,4 @@
-import { Inject, Injectable, PLATFORM_ID, inject, signal } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { PlayerService } from './player.service';
 
@@ -17,21 +17,9 @@ export class LocalstorageService {
     this.isBrowser = isPlatformBrowser(this.platformId);
     if (this.isBrowser) {
       this.localStorage = this.document.defaultView?.localStorage;
-      console.log('localstorage service init');
       window.addEventListener('storage', this.storageEventListener.bind(this));
     }
   }
-
-  //private listenForStorageChanges() {
-  //  console.log('listening for storage changes');
-  //  this.renderer.listen('window', 'storage', (event: StorageEvent) => {
-  //    console.log('storage event', event);
-  //    if (event.key === 'player') {
-  //      this.playerService.player = signal(this.get('player'));
-  //    }
-  //  });
-  //  console.log('listening for storage changes end of constructor');
-  //}
 
   private storageEventListener(event: StorageEvent) {
     console.log('storage event', event);
