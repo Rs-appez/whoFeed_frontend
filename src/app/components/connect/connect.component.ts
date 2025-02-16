@@ -1,4 +1,4 @@
-import { Component, inject, AfterViewChecked } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
 import { LocalstorageService } from '../../services/localstorage.service';
 import { Player } from '../../interfaces/player';
@@ -23,8 +23,7 @@ export class ConnectComponent {
   playerName: string = '';
 
   constructor() {
-    this.player = this.localStorageService.get<Player>('player');
-
+    this.player = this.playerService.player();
     if (this.player) {
       this.connectPlayer();
     }
@@ -45,6 +44,6 @@ export class ConnectComponent {
   }
 
   connectPlayer() {
-    this.route.navigate(['/board']);
+    this.route.navigate(['/party']);
   }
 }
