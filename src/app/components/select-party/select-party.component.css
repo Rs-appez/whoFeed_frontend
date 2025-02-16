@@ -1,0 +1,27 @@
+.select-party {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.party {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 50%;
+  width: 50%;
+  margin: auto auto;
+
+  border: 2px solid black;
+}
+
+.party>div {
+  margin: 3% 8%;
+  height: 60%;
+  width: 40%;
+  border: 2px solid black;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
