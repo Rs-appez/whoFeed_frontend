@@ -1,8 +1,12 @@
 <div class="select-party">
   <div class="party">
-    <div class="create" (click)="createParty()">
+    <div class="create choice" (click)="createParty()">
       <h1>CREATE PARTY</h1>
     </div>
-    <div class="join"></div>
+    <div class="join choice">
+      <h1>JOIN PARTY</h1>
+      <input type="text" [(ngModel)]="partyId" placeholder="Enter party ID" />
+      <button (click)="joinParty()">JOIN</button>
+    </div>
   </div>
 </div>

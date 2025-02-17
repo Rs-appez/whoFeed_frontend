@@ -52,4 +52,14 @@ export class PartyService {
       },
     );
   }
+
+  joinParty(partyId: string): Observable<Party> {
+    return this.http.post<Party>(
+      `${this.url}/join_party/`,
+      { party_id: partyId },
+      {
+        headers: this.headers,
+      },
+    );
+  }
 }

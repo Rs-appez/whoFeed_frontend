@@ -3,10 +3,11 @@ import { PartyService } from '../../services/party.service';
 import { LocalstorageService } from '../../services/localstorage.service';
 import { Router } from '@angular/router';
 import { Party } from '../../interfaces/party';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-select-party',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './select-party.component.html',
   styleUrl: './select-party.component.css',
 })
@@ -19,6 +20,8 @@ export class SelectPartyComponent {
 
   party: Party | null = {} as Party;
 
+  partyId: string = '';
+
   constructor() {
     this.party = this.partyService.party();
     if (this.party) {
@@ -28,8 +31,20 @@ export class SelectPartyComponent {
 
   createParty() {
     this.partyService.makeParty().subscribe((party) => {
-      this.localStorageService.set('party', party);
-      this.route.navigate(['/board']);
+      this.party = party;
+      this.connectParty();
     });
+  }
+
+  joinParty() {
+    this.partyService.joinParty(this.partyId).subscribe((party) => {
+      this.party = party;
+      this.connectParty();
+    });
+  }
+
+  connectParty() {
+    this.localStorageService.set('party', this.party);
+    this.route.navigate(['/board']);
   }
 }
