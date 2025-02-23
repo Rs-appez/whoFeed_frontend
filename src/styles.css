@@ -4,6 +4,11 @@
   --color-scroll-select: #aa8971;
 }
 
+@font-face {
+  font-family: "LOL";
+  src: url("/fonts/Friz\ Quadrata\ Bold.otf") format("opentype");
+}
+
 * {
   margin: 0;
   padding: 0;
